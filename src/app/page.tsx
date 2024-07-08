@@ -1,5 +1,7 @@
+import BookingItem from '@/components/ui/booking-item';
 import Header from '@/components/ui/header';
 import Search from '@/components/ui/search';
+import SectionTitle from '@/components/ui/sectiont-title';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -22,6 +24,11 @@ export default function Home() {
 
         <div className="mt-6">
           <Search />
+        </div>
+
+        <div className="mt-6">
+          <SectionTitle text="Agendamento" />
+          <BookingItem />
         </div>
       </div>
     </div>
