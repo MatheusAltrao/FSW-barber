@@ -14,31 +14,40 @@ export default async function Home() {
     <div>
       <Header />
 
-      <div className="px-5 py-6">
-        <div className="space-y-1">
-          <h2 className="text-xl">
-            Olá, <span className="font-bold">Miguel</span>!
-          </h2>
-          <p className="capitalize text-sm">
-            {format(new Date(), "EEEE, dd 'de'  MMMM  ", {
-              locale: ptBR,
-            })}
-          </p>
-        </div>
+      <div className="px-5 pt-6 pb-20 space-y-8">
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <h2 className="text-xl">
+              Olá, <span className="font-bold">Miguel</span>!
+            </h2>
+            <p className="capitalize text-sm">
+              {format(new Date(), "EEEE, dd 'de'  MMMM  ", {
+                locale: ptBR,
+              })}
+            </p>
+          </div>
 
-        <div className="mt-6">
           <Search />
         </div>
-
-        <div className="mt-6">
+        <div>
           <SectionTitle text="Agendamento" />
           <BookingItem />
         </div>
 
-        <div className="mt-6">
+        <div>
           <SectionTitle text="RECOMENDADOS" />
 
-          <div className="flex items-center gap-2 overflow-x-scroll  [&::-webkit-scrollbar]:hidden ">
+          <div className="flex items-center gap-2 overflow-x-scroll pb-2 ">
+            {barbershops.map((barbershop) => (
+              <BarbershopItem barbershop={barbershop} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionTitle text="POPULARES" />
+
+          <div className="flex items-center gap-2 overflow-x-scroll pb-2 ">
             {barbershops.map((barbershop) => (
               <BarbershopItem barbershop={barbershop} />
             ))}
