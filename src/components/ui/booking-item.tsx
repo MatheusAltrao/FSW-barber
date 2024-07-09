@@ -5,13 +5,13 @@ import { Card, CardContent } from './card';
 const BookingItem = () => {
   return (
     <Card>
-      <CardContent className="grid py-0  grid-cols-4">
-        <div className="col-span-3 p-5 border-r ">
+      <CardContent className="grid p-0 grid-cols-4">
+        <div className="col-span-3 p-3 border-r ">
           <div>
             <Badge className="bg-[#221C3D] text-primary hover:bg-[#221C3D] ">Confirmado</Badge>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-4">
             <h3 className="font-bold ">Corte de Cabelo</h3>
             <div className="flex items-center gap-2">
               <Avatar className="h-6 w-6">
