@@ -48,8 +48,11 @@ export default async function Home() {
           <SectionTitle text="POPULARES" />
 
           <div className="flex items-center gap-2 overflow-x-scroll pb-2 ">
-            {barbershops.map((barbershop) => (
-              <BarbershopItem barbershop={barbershop} />
+            {barbershops.map((barbershop, index) => (
+              <BarbershopItem
+                key={index}
+                barbershop={barbershop}
+              />
             ))}
           </div>
         </div>
