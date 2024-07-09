@@ -1,3 +1,4 @@
+import Footer from '@/components/ui/footer';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.className} dark`}>{children}</body>
+      <body className={`${inter.className} dark`}>
+        {children} <Footer />
+      </body>
     </html>
   );
 }
