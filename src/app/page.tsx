@@ -1,11 +1,15 @@
+import BarbershopItem from '@/components/ui/barbershop-item';
 import BookingItem from '@/components/ui/booking-item';
 import Header from '@/components/ui/header';
 import Search from '@/components/ui/search';
 import SectionTitle from '@/components/ui/sectiont-title';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { db } from './lib/prisma';
 
-export default function Home() {
+export default async function Home() {
+  const barbershops = await db.barbershop.findMany();
+
   return (
     <div>
       <Header />
@@ -29,6 +33,16 @@ export default function Home() {
         <div className="mt-6">
           <SectionTitle text="Agendamento" />
           <BookingItem />
+        </div>
+
+        <div className="mt-6">
+          <SectionTitle text="RECOMENDADOS" />
+
+          <div className="flex items-center gap-2 overflow-x-scroll  [&::-webkit-scrollbar]:hidden ">
+            {barbershops.map((barbershop) => (
+              <BarbershopItem barbershop={barbershop} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
