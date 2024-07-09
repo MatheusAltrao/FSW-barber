@@ -3,6 +3,7 @@ import Divider from '@/components/ui/divider';
 import SectionTitle from '@/components/ui/sectiont-title';
 import { redirect } from 'next/navigation';
 import BarbershopInfo from '../components/barbershop-info';
+import ServiceItem from '../components/service-item';
 
 interface BarbersopDetailsPageProps {
   params: {
@@ -15,6 +16,9 @@ const BarbersopDetailsPage = async ({ params }: BarbersopDetailsPageProps) => {
     where: {
       id: params.id,
     },
+    include: {
+      services: true,
+    },
   });
 
   if (!params.id || !barbershop) {
@@ -22,7 +26,7 @@ const BarbersopDetailsPage = async ({ params }: BarbersopDetailsPageProps) => {
   }
 
   return (
-    <div>
+    <div className="pb-20">
       <BarbershopInfo barbershop={barbershop} />
 
       <Divider />
@@ -37,6 +41,19 @@ const BarbersopDetailsPage = async ({ params }: BarbersopDetailsPageProps) => {
       </div>
 
       <Divider />
+
+      <div className="px-5">
+        <SectionTitle text="SERVIÇOS" />
+
+        <div className="space-y-4">
+          {barbershop.services.map((service) => (
+            <ServiceItem
+              key={service.id}
+              service={service}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
