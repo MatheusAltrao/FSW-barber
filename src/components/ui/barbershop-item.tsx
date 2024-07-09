@@ -28,7 +28,7 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
           className="h-[159px] m-0 w-full object-cover rounded-t-md group-hover:scale-110 transition-transform "
         />
 
-        <Badge className="flex  absolute bg-[#221C3D]  hover:bg-[#221C3D]  top-0 left-2 items-center justify-center gap-2 px-2 py-1">
+        <Badge className="flex  absolute   top-0 left-2 items-center justify-center gap-2 px-2 py-1">
           <Star
             className="text-primary fill-primary"
             size={16}

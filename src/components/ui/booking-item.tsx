@@ -8,7 +8,7 @@ const BookingItem = () => {
       <CardContent className="grid p-0 grid-cols-4">
         <div className="col-span-3 p-3 border-r ">
           <div>
-            <Badge className="bg-[#221C3D] text-primary hover:bg-[#221C3D] ">Confirmado</Badge>
+            <Badge>Confirmado</Badge>
           </div>
 
           <div className="space-y-4">
