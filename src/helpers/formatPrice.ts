@@ -1,6 +1,4 @@
-import { Decimal } from '@prisma/client/runtime/library';
-
-export const formattedPrice = (price: Decimal) => {
+export const formattedPrice = (price: any) => {
   const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
