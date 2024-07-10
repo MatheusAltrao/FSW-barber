@@ -1,7 +1,9 @@
 'use client';
+import { SaveBookingAction } from '@/app/actions/booking/save-booking-action';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent } from '@/components/ui/card';
+import Loading from '@/components/ui/loading';
 import {
   Sheet,
   SheetContent,
@@ -13,11 +15,11 @@ import {
 import { formattedPrice } from '@/helpers/formatPrice';
 import { generateDayTimeList } from '@/helpers/hours';
 import { Barbershop, Service } from '@prisma/client';
-import { addDays, format } from 'date-fns';
+import { addDays, format, setHours, setMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 
 interface ServiceProps {
   barbershop: Barbershop;
@@ -26,8 +28,10 @@ interface ServiceProps {
 }
 
 const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => {
+  const { data } = useSession();
   const [date, setDate] = useState<Date | undefined>(addDays(new Date(), 1));
   const [hour, setHour] = useState<string | undefined>();
+  const [isPending, startTransition] = useTransition();
 
   const handleBookingClick = async () => {
     if (!isAuthenticated) {
@@ -48,13 +52,28 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
     setHour(hour);
   };
 
-  /*  const handleBookingSubmit = async () => {
-    try {
-      await saveBooking();
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
+  const handleBookingSubmit = async () => {
+    startTransition(() => {
+      try {
+        if (!hour || !date || !data?.user) {
+          return;
+        }
+
+        const dateHour = Number(hour.split(':')[0]);
+        const dateMinutes = Number(hour.split(':')[1]);
+        const newDate = setMinutes(setHours(date, dateHour), dateMinutes);
+
+        SaveBookingAction({
+          serviceId: service.id,
+          barbershopId: service.barbershopId,
+          date: newDate,
+          userId: (data.user as any).id,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
   return (
     <Card>
       <CardContent className=" flex gap-4 p-3">
@@ -151,10 +170,11 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
 
                 <SheetFooter className="px-5">
                   <Button
-                    disabled={!date || !hour}
+                    onClick={handleBookingSubmit}
+                    disabled={!date || !hour || isPending}
                     className="w-full disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Confirmar Reserva
+                    {isPending ? <Loading /> : ' Confirmar Reserva'}
                   </Button>
                 </SheetFooter>
               </SheetContent>
