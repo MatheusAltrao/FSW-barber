@@ -21,7 +21,7 @@ const Header = () => {
   const { data, status } = useSession();
 
   const handleSignInClick = async () => {
-    await signIn();
+    await signIn('google');
   };
 
   const handleSignOutClick = async () => {
