@@ -1,14 +1,22 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { formattedPrice } from '@/helpers/formatPrice';
 import { Service } from '@prisma/client';
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 
 interface ServiceProps {
   service: Service;
+  isAuthenticated: boolean;
 }
 
-const ServiceItem = ({ service }: ServiceProps) => {
+const ServiceItem = ({ service, isAuthenticated }: ServiceProps) => {
+  const handleBookingClick = async () => {
+    if (!isAuthenticated) {
+      await signIn('google');
+    }
+  };
   return (
     <Card>
       <CardContent className=" flex gap-4 p-3">
@@ -30,7 +38,12 @@ const ServiceItem = ({ service }: ServiceProps) => {
 
           <div className="flex items-center justify-between w-full">
             <span className="text-primary font-bold  ">{formattedPrice(service.price)}</span>
-            <Button size={'sm'}>Reservar</Button>
+            <Button
+              onClick={handleBookingClick}
+              size={'sm'}
+            >
+              Reservar
+            </Button>
           </div>
         </div>
       </CardContent>

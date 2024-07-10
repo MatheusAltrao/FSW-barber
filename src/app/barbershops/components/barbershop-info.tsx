@@ -2,9 +2,10 @@
 
 import { Button } from '@/components/ui/button';
 import { Barbershop } from '@prisma/client';
-import { ChevronLeft, MapPinIcon, Menu, Star } from 'lucide-react';
+import { ChevronLeft, MapPinIcon, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Sidemenu from './sidemenu';
 
 interface BarbershopInfoProps {
   barbershop: Barbershop;
@@ -14,7 +15,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    return router.back();
+    return router.replace('/');
   };
 
   return (
@@ -37,13 +38,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
           <ChevronLeft size={20} />
         </Button>
 
-        <Button
-          size={'icon'}
-          variant={'outline'}
-          className=" absolute top-4 right-4 z-10"
-        >
-          <Menu size={20} />
-        </Button>
+        <Sidemenu />
       </div>
 
       <div className="py-3 px-5 space-y-3">
