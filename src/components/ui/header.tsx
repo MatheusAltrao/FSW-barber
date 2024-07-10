@@ -73,10 +73,7 @@ const Header = () => {
           {status == 'unauthenticated' && (
             <div>
               <SheetDescription>
-                <p>
-                  Você ainda não fez login, entre com o Google para liberar as novas
-                  funcionalidades.
-                </p>
+                Você ainda não fez login, entre com o Google para liberar as novas funcionalidades.
               </SheetDescription>
 
               <Button
