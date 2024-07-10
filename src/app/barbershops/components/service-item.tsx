@@ -12,6 +12,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/components/ui/use-toast';
 import { formattedPrice } from '@/helpers/formatPrice';
 import { generateDayTimeList } from '@/helpers/hours';
 import { Barbershop, Service } from '@prisma/client';
@@ -19,6 +21,7 @@ import { addDays, format, setHours, setMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState, useTransition } from 'react';
 
 interface ServiceProps {
@@ -32,7 +35,9 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
   const [date, setDate] = useState<Date | undefined>(addDays(new Date(), 1));
   const [hour, setHour] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
-
+  const [open, setOpen] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
   const handleBookingClick = async () => {
     if (!isAuthenticated) {
       await signIn('google');
@@ -69,6 +74,26 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
           date: newDate,
           userId: (data.user as any).id,
         });
+
+        setOpen(false);
+        setHour(undefined);
+        setDate(addDays(new Date(), 1));
+
+        const formattedDate = format(date, 'dd/MM/yyyy');
+        const notification = ` ${service.name} ${formattedDate} às ${hour}.`;
+
+        toast({
+          title: `${service.name} agendado!`,
+          description: notification,
+          action: (
+            <ToastAction
+              onClick={() => router.push('/bookings')}
+              altText="Visualizar"
+            >
+              Visualizar
+            </ToastAction>
+          ),
+        });
       } catch (error) {
         console.log(error);
       }
@@ -95,7 +120,10 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
 
           <div className="flex items-center justify-between w-full">
             <span className="text-primary font-bold  ">{formattedPrice(service.price)}</span>
-            <Sheet>
+            <Sheet
+              open={open}
+              onOpenChange={setOpen}
+            >
               <SheetTrigger asChild>
                 <Button
                   onClick={handleBookingClick}
