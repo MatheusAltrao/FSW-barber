@@ -1,4 +1,5 @@
 'use client';
+import { GetDayBookingsAction } from '@/app/actions/booking/get-day-bookings-action';
 import { SaveBookingAction } from '@/app/actions/booking/save-booking-action';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -16,13 +17,13 @@ import { ToastAction } from '@/components/ui/toast';
 import { useToast } from '@/components/ui/use-toast';
 import { formattedPrice } from '@/helpers/formatPrice';
 import { generateDayTimeList } from '@/helpers/hours';
-import { Barbershop, Service } from '@prisma/client';
+import { Barbershop, Booking, Service } from '@prisma/client';
 import { addDays, format, setHours, setMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState, useTransition } from 'react';
+import { useEffect, useMemo, useState, useTransition } from 'react';
 
 interface ServiceProps {
   barbershop: Barbershop;
@@ -38,6 +39,22 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const [dayBookings, setDaysBookings] = useState<Booking[]>([]);
+
+  console.log(dayBookings);
+
+  useEffect(() => {
+    if (!date) {
+      return;
+    }
+    const refreshAvaliableHours = async () => {
+      const result = await GetDayBookingsAction(date);
+      setDaysBookings(result);
+    };
+
+    refreshAvaliableHours();
+  }, [date]);
+
   const handleBookingClick = async () => {
     if (!isAuthenticated) {
       await signIn('google');
@@ -50,8 +67,27 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
   };
 
   const timelist = useMemo(() => {
-    return date ? generateDayTimeList(date) : [];
-  }, [date]);
+    if (!date) {
+      return [];
+    }
+    return generateDayTimeList(date).filter((time) => {
+      const timeHour = Number(time.split(':')[0]);
+      const timeMinutes = Number(time.split(':')[1]);
+
+      const booking = dayBookings.find((booking) => {
+        const bookingHour = booking.date.getHours();
+        const bookingMinutes = booking.date.getMinutes();
+
+        return bookingHour === timeHour && bookingMinutes === timeMinutes;
+      });
+
+      if (!booking) {
+        return true;
+      }
+
+      return false;
+    });
+  }, [date, dayBookings]);
 
   const hadleSetHourClick = (hour: string) => {
     setHour(hour);
@@ -81,7 +117,7 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
 
         const formattedDate = format(date, 'dd/MM/yyyy');
         const notification = ` ${service.name} ${formattedDate} às ${hour}.`;
-
+        router.refresh();
         toast({
           title: `${service.name} agendado!`,
           description: notification,
@@ -99,6 +135,7 @@ const ServiceItem = ({ service, isAuthenticated, barbershop }: ServiceProps) => 
       }
     });
   };
+
   return (
     <Card>
       <CardContent className=" flex gap-4 p-3">
