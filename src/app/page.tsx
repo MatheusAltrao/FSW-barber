@@ -1,5 +1,4 @@
 import BarbershopItem from '@/components/ui/barbershop-item';
-import BookingItem from '@/components/ui/booking-item';
 import Header from '@/components/ui/header';
 import Search from '@/components/ui/search';
 import SectionTitle from '@/components/ui/sectiont-title';
@@ -31,11 +30,11 @@ export default async function Home() {
         </div>
         <div>
           <SectionTitle text="Agendamento" />
-          <BookingItem />
+          {/*  <BookingItem /> */}
         </div>
 
         <div>
-          <SectionTitle text="RECOMENDADOS" />
+          <SectionTitle text="Recomendados" />
 
           <div className="flex items-center gap-2 overflow-x-scroll pb-2 ">
             {barbershops.map((barbershop, index) => (
