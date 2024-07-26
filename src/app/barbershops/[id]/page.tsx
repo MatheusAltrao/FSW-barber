@@ -1,4 +1,4 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/lib/auth';
 import { db } from '@/app/lib/prisma';
 import Divider from '@/components/ui/divider';
 import SectionTitle from '@/components/ui/sectiont-title';

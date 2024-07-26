@@ -6,7 +6,8 @@ import SectionTitle from '@/components/ui/sectiont-title';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
+
+import { authOptions } from './lib/auth';
 import { db } from './lib/prisma';
 
 export default async function Home() {
