@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { getServerSession } from 'next-auth';
 
-import { authOptions } from './lib/auth';
+import { authOptions } from '@/lib/auth';
 import { db } from './lib/prisma';
 
 export default async function Home() {

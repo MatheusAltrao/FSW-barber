@@ -5,7 +5,7 @@ import SectionTitle from '@/components/ui/sectiont-title';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
-import { authOptions } from '../lib/auth';
+import { authOptions } from '../../lib/auth';
 import { db } from '../lib/prisma';
 
 const Bookings = async () => {

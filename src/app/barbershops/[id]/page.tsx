@@ -1,7 +1,7 @@
-import { authOptions } from '@/app/lib/auth';
 import { db } from '@/app/lib/prisma';
 import Divider from '@/components/ui/divider';
 import SectionTitle from '@/components/ui/sectiont-title';
+import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import BarbershopInfo from '../components/barbershop-info';
