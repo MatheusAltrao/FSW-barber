@@ -10,6 +10,12 @@
 
 ## Introdução
 
+Estou muito empolgado em compartilhar um projeto recente que desenvolvi: um sistema de agendamento de serviços para barbearias! 💈✨
+
+Utilizando Next.js, TailwindCSS, Supabase, Prisma e shadcnui, consegui criar uma aplicação eficiente e responsiva para facilitar o agendamento de serviços em barbearias. A combinação dessas tecnologias permitiu uma experiência de usuário fluida e uma gestão de dados robusta.
+
+## Funcionaliadades
+
 Para aqueles que desejam utilizar o sistema de agendamento de serviços para barbearias, é bem simples e intuitivo. Aqui estão algumas das principais funcionalidades:
 
 - Utilizando NextAuth, os usuários podem se autenticar facilmente com suas contas do Google, garantindo um processo de login rápido e seguro.
