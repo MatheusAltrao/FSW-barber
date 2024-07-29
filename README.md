@@ -28,11 +28,7 @@ Rotas Dinâmicas para Cada Serviço da Barbearia:
 Confira o projeto no Figma e o link para o deploy abaixo:
 
 [Figma](https://www.figma.com/design/jMzRq8rks94mr4pKyicwCK/FSW-Barber?node-id=0-1&t=miACtnIIC6D72a2q-0)
-[Deploy]([https://www.figma.com/design/jMzRq8rks94mr4pKyicwCK/FSW-Barber?node-id=0-1&t=miACtnIIC6D72a2q-0](https://fsw-barber-lemon.vercel.app/))
-
-
-
-
+[Deploy](https://fsw-barber-lemon.vercel.app/)
 
 
 # Contato
