@@ -13,10 +13,11 @@ export const GetDayBookingsAction = async (date: Date) => {
         },
       },
     });
-    return true;
+    return bookings;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);
     }
+    return [];
   }
 };
