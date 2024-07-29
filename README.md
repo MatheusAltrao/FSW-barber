@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center"> FSW Barber </h1> <br>
+<p align="center">
+    <img src="https://i.pinimg.com/originals/54/12/83/5412837dc4efb7f9dec987894df22ed9.png" alt="Chat com OpenAI">
+</p>
 
-## Getting Started
+<p align="center">
+ Feito com Next.js, TailwindCSS, React 19, Prisma, Supabase, ShadcnUI.
+</p>
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Introdução
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para aqueles que desejam utilizar o sistema de agendamento de serviços para barbearias, é bem simples e intuitivo. Aqui estão algumas das principais funcionalidades:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Utilizando NextAuth, os usuários podem se autenticar facilmente com suas contas do Google, garantindo um processo de login rápido e seguro.
+Filtro usando a URL:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- A aplicação permite filtrar serviços e agendamentos diretamente pela URL, facilitando a navegação e a busca de informações específicas.
 
-## Learn More
+- Os usuários podem visualizar um calendário interativo e criar agendamentos de forma simples, selecionando a data e o horário desejados para o serviço.
 
-To learn more about Next.js, take a look at the following resources:
+- Caso precise cancelar um compromisso, a aplicação oferece a opção de excluir agendamentos facilmente, garantindo flexibilidade e controle para o usuário.
+Rotas Dinâmicas para Cada Serviço da Barbearia:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- A aplicação possui rotas dinâmicas que permitem visualizar detalhes de cada serviço oferecido pela barbearia, proporcionando uma experiência personalizada e informativa.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Confira o projeto no Figma e o link para o deploy abaixo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[Link do Figma]([https://lnkd.in/dd9SxQwp](https://www.figma.com/design/jMzRq8rks94mr4pKyicwCK/FSW-Barber?node-id=0-1&t=miACtnIIC6D72a2q-0))
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Deploy]([https://lnkd.in/dhF7jx-2](https://fsw-barber-lemon.vercel.app/))
+
+
+# Contato
+
+- Dono: Matheus Altrão
+- Email: matheusaltrao2@gmail.com
+- linkedin:[linkedin.com/matheus-altrao](https://www.linkedin.com/in/matheus-altrao/)
+- Portfolio:[www.matheusaltrao.dev](https://www.matheusaltrao.dev/)
