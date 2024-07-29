@@ -1,6 +1,6 @@
 <h1 align="center"> FSW Barber </h1> <br>
 <p align="center">
-    <img src="https://i.pinimg.com/originals/54/12/83/5412837dc4efb7f9dec987894df22ed9.png" alt="Chat com OpenAI">
+    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Freactjsexample.com%2Ffsw-barber-a-barber-shop-reservation-app-using-next-js%2F&psig=AOvVaw3SSi87KxXvhx1mjO4ExTBp&ust=1722350005784000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKjbkPS7zIcDFQAAAAAdAAAAABAE " alt="Fsw barber">
 </p>
 
 <p align="center">
