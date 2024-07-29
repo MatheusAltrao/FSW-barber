@@ -10,12 +10,19 @@ interface SaveBookingActionProps {
 }
 
 export const SaveBookingAction = async (params: SaveBookingActionProps) => {
-  await db.booking.create({
-    data: {
-      serviceId: params.serviceId,
-      barbershopId: params.barbershopId,
-      userId: params.userId,
-      date: params.date,
-    },
-  });
+  try {
+    await db.booking.create({
+      data: {
+        serviceId: params.serviceId,
+        barbershopId: params.barbershopId,
+        userId: params.userId,
+        date: params.date,
+      },
+    });
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+  }
 };
