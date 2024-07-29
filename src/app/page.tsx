@@ -13,7 +13,7 @@ import { db } from './lib/prisma';
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
-  const [confirmedBookings, barbershops] = await Promise.all([
+  const [confirmedBookings, barbershops, popularBarberShops] = await Promise.all([
     session?.user
       ? await db.booking.findMany({
           where: {
@@ -29,6 +29,11 @@ export default async function Home() {
         })
       : [],
     db.barbershop.findMany(),
+    db.barbershop.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+    }),
   ]);
 
   return (
@@ -87,7 +92,7 @@ export default async function Home() {
           <SectionTitle text="POPULARES" />
 
           <div className="flex items-center gap-2 overflow-x-scroll pb-2 ">
-            {barbershops.map((barbershop, index) => (
+            {popularBarberShops.map((barbershop, index) => (
               <BarbershopItem
                 key={index}
                 barbershop={barbershop}
